@@ -6,3 +6,6 @@ def index(request):
 
 def rulesView(request):
     return render(request, "core/rules.html")
+
+def users(request):
+    return render(request, "core/users.html")
