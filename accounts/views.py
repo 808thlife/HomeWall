@@ -1,5 +1,7 @@
 from django.shortcuts import render
-
+from django.contrib.auth import login, authenticate, logout
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
 # Create your views here.
 def index(request):
     pass
@@ -15,8 +17,14 @@ def login_view(request):
 
         # Check if authentication successful
         if user is not None:
-            login(request, user)
-            return HttpResponseRedirect(reverse("auctions:index"))
+            if user.is_staff:
+                login(request, user)
+                return HttpResponseRedirect(reverse("core:index"))
+            else:
+                login(request,user)
+                print("something")
+                return HttpResponse("you are an ordinary user") 
+                #IT SHOULD REDIRECT USER TO USERUI PAGE. WILL IMPLEMENT IT LATER
         else:
             return render(request, "accounts/pages-login.html", {
                 "message": "Invalid username and/or password."
@@ -27,5 +35,5 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse("auctions:index"))
+    return HttpResponseRedirect(reverse("accounts:login"))
 
