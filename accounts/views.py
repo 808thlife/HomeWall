@@ -17,15 +17,19 @@ def login_view(request):
 
         # Check if authentication successful
         if user is not None:
+            print("user exists")
             if user.is_staff:
+                print("user is in staff")
                 login(request, user)
                 return HttpResponseRedirect(reverse("core:index"))
             else:
+                print("invalid login")
                 login(request,user)
                 print("something")
                 return HttpResponse("you are an ordinary user") 
                 #IT SHOULD REDIRECT USER TO USERUI PAGE. WILL IMPLEMENT IT LATER
         else:
+            print("sdfdf")
             return render(request, "accounts/pages-login.html", {
                 "message": "Invalid username and/or password."
             })
