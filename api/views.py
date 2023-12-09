@@ -1,11 +1,13 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAdminUser
 from rest_framework import status
 from accounts.models import User
 from .serializers import UserSerializer
 
 class UserModelView(APIView):
+    permission_classes = [IsAdminUser]
     #getting all users
     def get(self, request):
         print(User.objects.filter(username = "test"))

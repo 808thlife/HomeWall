@@ -3,6 +3,12 @@
 {% block body %}
 
 <main id="main" class="main">
+  <div class="alert alert-success" role="alert" id ="add-user-success">
+    <h4 class="alert-heading">Well done!</h4>
+    <p>User successfully created!</p>
+    <hr>
+    <p class="mb-0">Just wrote something here so it won't look so empty :=</p>
+  </div>
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Firewall Rules</h5>
@@ -84,31 +90,34 @@
           
         </div>
         <div class="modal-body" id = "modal-body">
+          <div id = "add-user-form">
             <form action="">
 
-              <div class="col-12">
-                <label for="yourUsername" class="form-label">Username</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text" id="inputGroupPrepend">@</span>
-                  <input type="text" name="username" class="form-control" id="add-username" placeholder = "Username..." required>
-                  <div class="invalid-feedback">Please enter your username.</div>
+            <div class="col-12">
+              <label for="yourUsername" class="form-label">Username</label>
+              <div class="input-group has-validation">
+                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                <input type="text" name="username" class="form-control" id="add-username" placeholder = "Username..." required>
+                <div class="invalid-feedback">Please enter your username.</div>
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="yourUsername" class="form-label">Role</label>
+                <label class="col-sm-2 col-form-label">Select</label>
+                <div class="col-sm-10">
+                  <select class="form-select" aria-label="Default select example" id = "add-role-option">
+                    <option value="Programmer">Brogrammer</option>
+                    <option value="REngineer">Robotic Engineer</option>
+                    <option value="NEngineer">Network Engineer</option>
+                  </select>
                 </div>
-              </div>
-              <div class="col-12">
-                <label for="yourUsername" class="form-label">Role</label>
-                  <label class="col-sm-2 col-form-label">Select</label>
-                  <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example" id = "add-role-option">
-                      <option value="Programmer">Brogrammer</option>
-                      <option value="REngineer">Robotic Engineer</option>
-                      <option value="NEngineer">Network Engineer</option>
-                    </select>
-                  </div>
-              </div>
-            </form>
+            </div>
+          </form>
+        </div>
+            
         </div>
         <div class="modal-footer">
-          <button type="button" data-dismiss="modal" class="btn btn-primary" >Close</button>
+          <button type="button" data-dismiss="modal" class="btn btn-primary" id ="close-modal-button" >Close</button>
           <button type = "button" data-dismiss = "modal " class="btn btn-success" id ="add-user-button" >Add</button>
         </div>
       </div>
