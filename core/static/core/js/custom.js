@@ -32,34 +32,42 @@ add_user_button.addEventListener("click", (event)=>{
           },
         body: JSON.stringify({
             "username": username,
-            "role":role
+            "role":role,
         })
     })
     .then(response => {
         if (response.status === 400) {
-          // Handle 400 error
-          return response.json().then(errorData => {
-            // Use error data to display specific error message
-            console.error(errorData.message);
-          });
+            console.log("errro")
         } else if (!response.ok) {
           // Handle other non-200 status code errors
           throw new Error('Fetch error: ' + response.status);
         }
             else if(response.ok){
+                const users_table = document.querySelector("#user-table")
                 document.querySelector("#close-modal-button").click();
                 alert.style.display = "block";
                 window.onload = setTimeout(function(){
                    alert.style.display = "none";
                 }, 4000);
+                let new_user_element = document.createElement("tr")
+                new_user_element.innerHTML +=`
+                <tr>
+                <th scope="row">${document.querySelector("table").rows.length}</th>
+                <td>${username}</td>
+                <td>${role}</td>
+                <td>Traffic</td>
+                <td>None</td>
+                </tr>
+              `
+                users_table.append(new_user_element);
             }
         return response.json();
       })
-      .then(data => {
-        // Process data
+      .then(data =>{
+        let request_error = data["error"]
+        const error_field = document.querySelector("#unique-user-error")
+        error_field.innerHTML = request_error
+        //unique-user-error
       })
-      .catch(error => {
-        // Handle generic errors
-        console.error(error);
-      });
+
 });

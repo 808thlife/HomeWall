@@ -10,7 +10,6 @@ class UserModelView(APIView):
     permission_classes = [IsAdminUser]
     #getting all users
     def get(self, request):
-        print(User.objects.filter(username = "test"))
         users = User.objects.all()
         serializer = UserSerializer(users, many = True) 
         return Response(serializer.data)
@@ -20,8 +19,9 @@ class UserModelView(APIView):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status":"created!"}, status=status.HTTP_201_CREATED)
+        #returning error
+        return Response({'error':f'{serializer.errors["username"][0]}'}, status=status.HTTP_400_BAD_REQUEST)
 
     def put():
         pass
