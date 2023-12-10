@@ -29,7 +29,7 @@ class UserModelView(APIView):
 
     #Delete User
     def delete(self, request, id):
-        id = request.data
+        id = request.data["id"]
         user = User.objects.get(id = id)
         if not user.is_superuser:
             user.delete()

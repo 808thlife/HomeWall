@@ -18,7 +18,9 @@ function getCookie(name) {
 //Creating user API
 const add_user_button = document.querySelector("#add-user-button");
 let alert = document.querySelector("#add-user-success")
+let delete_alert = document.querySelector(".alert-danger")
 //Alert won't be shown until user clicks a button
+delete_alert.style.display = "none"
 alert.style.display = "none";
 // listents to save button
 add_user_button.addEventListener("click", (event)=>{
@@ -82,7 +84,7 @@ delete_buttons.forEach((button) => {
   button.addEventListener("click", (e) => {
     let t_row = e.target.parentElement.parentElement;
     id = t_row.children[0].innerHTML
-    fetch("/api/",{
+    fetch(`/api/${id}`,{
         method:"DELETE",
         headers: {
             "X-CSRFToken": getCookie("csrftoken"),
@@ -91,6 +93,22 @@ delete_buttons.forEach((button) => {
         body: JSON.stringify({
             "id": id
         })
+    })
+    .then(response => {
+      if (response.status === 403) {
+          console.log("error")
+      } else if (!response.ok) {
+        // Handle other non-200 status code errors
+        throw new Error('Fetch error: ' + response.status);
+      }
+          else if(response.ok){
+            delete_alert.style.display = "block";
+            window.onload = setTimeout(function(){
+              delete_alert.style.display = "none";
+           }, 4000);
+           t_row.remove();
+          }
+      return response.json();
     })
   });
 });
