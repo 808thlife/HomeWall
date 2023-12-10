@@ -57,6 +57,8 @@ add_user_button.addEventListener("click", (event)=>{
                 <td>${role}</td>
                 <td>Traffic</td>
                 <td>None</td>
+                <td><button class = "btn btn-info"><i class="bi bi-pencil"></i></button></td>
+                <td><button class = "btn btn-danger delete-user"><i class="bi bi-trash"></i></button></td>
                 </tr>
               `
                 users_table.append(new_user_element);
@@ -71,3 +73,14 @@ add_user_button.addEventListener("click", (event)=>{
       })
 
 });
+
+
+//Deleting user API
+
+let delete_buttons = document.querySelectorAll(".delete-user");
+delete_buttons.forEach((button)=>{
+    button.addEventListener("click", (e)=>{
+        let t_row = e.target.parentElement.parentElement.parentElement.parentElement
+        console.log(t_row)
+    })
+})

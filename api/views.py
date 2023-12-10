@@ -23,8 +23,10 @@ class UserModelView(APIView):
         #returning error
         return Response({'error':f'{serializer.errors["username"][0]}'}, status=status.HTTP_400_BAD_REQUEST)
 
+    #Update User 
     def put():
         pass
 
+    #Delete User
     def delete(self, request):
         pass
