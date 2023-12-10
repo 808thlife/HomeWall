@@ -78,9 +78,19 @@ add_user_button.addEventListener("click", (event)=>{
 //Deleting user API
 
 let delete_buttons = document.querySelectorAll(".delete-user");
-delete_buttons.forEach((button)=>{
-    button.addEventListener("click", (e)=>{
-        let t_row = e.target.parentElement.parentElement.parentElement.parentElement
-        console.log(t_row)
+delete_buttons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    let t_row = e.target.parentElement.parentElement;
+    id = t_row.children[0].innerHTML
+    fetch("/api/",{
+        method:"DELETE",
+        headers: {
+            "X-CSRFToken": getCookie("csrftoken"),
+            "Content-Type": "application/json",
+          },
+        body: JSON.stringify({
+            "id": id
+        })
     })
-})
+  });
+});

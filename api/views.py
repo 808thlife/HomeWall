@@ -28,5 +28,10 @@ class UserModelView(APIView):
         pass
 
     #Delete User
-    def delete(self, request):
-        pass
+    def delete(self, request, id):
+        id = request.data
+        user = User.objects.get(id = id)
+        if not user.is_superuser:
+            user.delete()
+            return Response({"status":"User was succesffully deleted!"}, status=status.HTTP_200_OK)
+        return Response({"status":"You can't delete admin users!"}, status=status.HTTP_403_FORBIDDEN)

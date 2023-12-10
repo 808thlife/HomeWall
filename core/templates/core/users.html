@@ -29,16 +29,15 @@
         <tbody id ="user-table">
           {% for user in users %}
           <tr>
-            <th scope="row">{{user.id}}</th>
+            <th class ="t-head" scope="row">{{user.id}}</th>
             <td>{{user.username}}</td>
             <td>{{user.role}}</td>
             <td>Traffic</td>
             <td>{{user.last_login}}</td>
             <td><button class = "btn btn-info"><i class="bi bi-pencil"></i></button></td>
-            <td><div class = "delete-user">
-              <button class = "btn btn-danger"><i class="bi bi-trash"></i></button>
-            </div
-            ></td>
+            <td>
+              <button class = "btn btn-danger delete-user"><i class="bi bi-trash"></i></button>
+            </td>
           </tr>
           {% endfor %} 
         </tbody>
