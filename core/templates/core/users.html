@@ -3,9 +3,15 @@
 {% block body %}
 
 <main id="main" class="main">
+  <div class="alert alert-success" role="alert" id ="edit-user-success">
+    <h4 class="alert-heading">Well done!</h4>
+    <p>User was successfully edited!</p>
+    <hr>
+    <p class="mb-0">Just wrote something here so it won't look so empty :=</p>
+  </div>
   <div class="alert alert-success" role="alert" id ="add-user-success">
     <h4 class="alert-heading">Well done!</h4>
-    <p>User successfully created!</p>
+    <p>User was successfully created!</p>
     <hr>
     <p class="mb-0">Just wrote something here so it won't look so empty :=</p>
   </div>
@@ -14,6 +20,12 @@
     <p>User was succesffully deleted! -_-</p>
     <hr>
     <p class="mb-0">Tidy dishes deleted the user</p>
+  </div>
+  <div class="alert alert-danger" role="alert" id = "error-alert">
+    <h4 class="alert-heading">Whoops...</h4>
+    <p>Something Bad Happened</p>
+    <hr>
+    <p class="mb-0">Tidy dishes throwed an error</p>
   </div>
   <div class="card">
     <div class="card-body">
@@ -126,7 +138,7 @@
                           <div class="input-group has-validation">
                               <span class="input-group-text" id="inputGroupPrepend">@</span>
                               <input type="text" name="editUsername" class="form-control" id="edit-username" placeholder="Username..." required>
-                              <div class="invalid-feedback">Please enter your username.</div>
+                              <div class="invalid-feedback">Username</div>
                           </div>
                       </div>
                       <div class="col-12">

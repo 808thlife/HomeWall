@@ -5,5 +5,5 @@ app_name = "api"
 
 urlpatterns = [
     path("", views.UserModelView.as_view(), name = "index"),
-    path("<int:id>/", views.UserModelView.as_view(), name = "delete")
+    path("<int:id>", views.UserModelView.as_view(), name = "delete")
 ]
