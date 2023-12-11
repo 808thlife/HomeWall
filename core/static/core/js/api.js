@@ -14,7 +14,8 @@ function getCookie(name) {
     return cookieValue;
 }
 
-
+const error_field = document.querySelector("#unique-user-error")
+error_field.style.display = "none";
 //Creating user API
 const add_user_button = document.querySelector("#add-user-button");
 let alert = document.querySelector("#add-user-success")
@@ -69,7 +70,7 @@ add_user_button.addEventListener("click", (event)=>{
       })
       .then(data =>{
         let request_error = data["error"]
-        const error_field = document.querySelector("#unique-user-error")
+        error_field.style.display = "block"
         error_field.innerHTML = request_error
         //unique-user-error
       })
@@ -112,3 +113,20 @@ delete_buttons.forEach((button) => {
     })
   });
 });
+
+
+
+//UPDATE USER INFORMATION API
+
+
+
+
+const edit_buttons = document.querySelectorAll(".edit-user");
+
+edit_buttons.forEach((button)=>{
+  button.addEventListener("click", (e)=>{
+    let t_row = e.target.parentElement.parentElement
+    id = t_row.children[0].innerHTML
+
+  })
+})
