@@ -182,7 +182,7 @@ edit_buttons.forEach((button)=>{
             window.onload = setTimeout(function(){
               edit_alert.style.display = "none";
            }, 4000);
-           t_row.remove();
+     
               t_row.children[1].innerHTML = document.querySelector("#edit-username").value
               t_row.children[2].innerHTML = document.querySelector("#edit-role-option").value
             }

@@ -25,7 +25,7 @@ class UserModelView(APIView):
 
     #Update User 
     def put(self, request, id):
-        id = request.data["id"]
+        
         try:
             user = User.objects.get(id=id)
         except User.DoesNotExist:
@@ -40,7 +40,7 @@ class UserModelView(APIView):
 
     #Delete User
     def delete(self, request, id):
-        id = request.data["id"]
+        
         user = User.objects.get(id = id)
         if not user.is_superuser:
             user.delete()
