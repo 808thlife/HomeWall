@@ -52,14 +52,14 @@ add_user_button.addEventListener("click", (event)=>{
     })
     .then(response => {
         if (response.status === 400) {
-          callAlert(errorAlert);
+          console.log('error')
         } else if (!response.ok) {
-          // Handle other non-200 status code errors
-          callAlert(errorAlert);
+          
+          console.log("error")
         }
             else if(response.ok){
                 const users_table = document.querySelector("#user-table")
-                document.querySelector("#close-modal-button").click();
+                //document.querySelector("#close-add-modal-button").click();
                 alert.style.display = "block";
                 window.onload = setTimeout(function(){
                    alert.style.display = "none";
@@ -82,8 +82,21 @@ add_user_button.addEventListener("click", (event)=>{
       })
       .then(data =>{
         let request_error = data["error"]
-        error_field.style.display = "block"
-        error_field.innerHTML = request_error
+        if (request_error != undefined){
+          let error_alert = document.querySelector("#error-p")
+          error_field.style.display = "block"
+          errorAlert.style.display = "block"
+          error_field.innerHTML = request_error
+  
+          error_alert.innerHTML = request_error
+  
+          window.onload = setTimeout(function(){
+            errorAlert.style.display = "none";
+            error_field.style.display = "none";
+         }, 4000);
+        }
+        
+       
         //unique-user-error
       })
 
@@ -170,11 +183,11 @@ edit_buttons.forEach((button)=>{
       })
       .then(response => {
         if (response.status === 403) {
-          callAlert(errorAlert);
+          
         } else if (!response.ok) {
           // Handle other non-200 status code errors
-          callAlert(errorAlert);
-          throw new Error('Fetch error: ' + response.status);
+          
+          
         }
             else if(response.ok){
               edit_alert.style.display = "block"
@@ -189,7 +202,25 @@ edit_buttons.forEach((button)=>{
         return response.json();
       })
 
-
+      .then(data =>{
+        let request_error = data["error"]
+        if (request_error != undefined){
+          let error_alert = document.querySelector("#error-p")
+          error_field.style.display = "block"
+          errorAlert.style.display = "block"
+          error_field.innerHTML = request_error
+  
+          error_alert.innerHTML = request_error
+  
+          window.onload = setTimeout(function(){
+            errorAlert.style.display = "none";
+            error_field.style.display = "none";
+         }, 4000);
+        }
+        
+       
+        //unique-user-error
+      })
     })
   })
 })

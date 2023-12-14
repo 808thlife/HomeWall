@@ -35,7 +35,7 @@ class UserModelView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error':f'{serializer.errors["username"][0]}'}, status=status.HTTP_400_BAD_REQUEST)
         
 
     #Delete User

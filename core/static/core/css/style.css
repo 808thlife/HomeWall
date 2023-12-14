@@ -1236,3 +1236,6 @@ i{
   pointer-events: none;
 }
 
+.alert{
+  display: none;
+}
