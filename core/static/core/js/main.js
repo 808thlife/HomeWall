@@ -47,6 +47,7 @@
     })
   }
 
+
   /**
    * Search bar toggle
    */

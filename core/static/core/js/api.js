@@ -6,6 +6,7 @@ function callAlert(alert){
 }
 
 
+
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {

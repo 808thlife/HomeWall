@@ -1236,6 +1236,10 @@ i{
   pointer-events: none;
 }
 
+.toggle-sidebar-btn{
+  pointer-events: all;
+}
+
 .alert{
   display: none;
 }
