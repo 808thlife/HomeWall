@@ -1235,7 +1235,7 @@ h6 {
 i{
   pointer-events: none;
 }
-
+/* toggling sidebar won't work without the code below */
 .toggle-sidebar-btn{
   pointer-events: all;
 }
