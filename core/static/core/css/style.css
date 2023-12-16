@@ -1232,9 +1232,11 @@ h6 {
   color: #012970;
 }
 
+/* wrote it so it wont interference with buttons */
 i{
   pointer-events: none;
 }
+
 /* toggling sidebar won't work without the code below */
 .toggle-sidebar-btn{
   pointer-events: all;
