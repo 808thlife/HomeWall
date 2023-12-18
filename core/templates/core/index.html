@@ -12,22 +12,7 @@
           
           <script>
             document.addEventListener("DOMContentLoaded", () => {
-              const ramChart = echarts.init(document.querySelector("#pieChart"))
-
-              function updateChartWithRamData(ramData) {
-                // Assuming ramData is an array with RAM usage values
-        
-                ramChart.setOption({
-                    series: [{
-                        data: ramData.map(value => ({
-                            value,
-                            name: `RAM Usage ${value}` // Using RAM usage values from the fetched data
-                        }))
-                    }]
-                });
-            }
-            
-              ramChart.setOption({
+              echarts.init(document.querySelector("#pieChart")).setOption({
                 title: {
                   text: 'Referer of a Website',
                   subtext: 'Fake Data',
