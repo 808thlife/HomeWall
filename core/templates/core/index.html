@@ -2,6 +2,73 @@
 {% load static %}
 {% block body %}
   <main id="main" class="main">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Pie Chart</h5>
+
+          <!-- Pie Chart -->
+          <div id="pieChart" style="min-height: 400px; user-select: none; position: relative;" class="echart" _echarts_instance_="ec_1702928801592"><div style="position: relative; width: 720px; height: 400px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas style="position: absolute; left: 0px; top: 0px; width: 720px; height: 400px; user-select: none; padding: 0px; margin: 0px; border-width: 0px;" data-zr-dom-id="zr_0" width="720" height="400"></canvas></div><div class="" style="position: absolute; display: block; border-style: solid; white-space: nowrap; z-index: 9999999; box-shadow: rgba(0, 0, 0, 0.2) 1px 2px 10px; transition: opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1) 0s, visibility 0.2s cubic-bezier(0.23, 1, 0.32, 1) 0s, transform 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s; background-color: rgb(255, 255, 255); border-width: 1px; border-radius: 4px; color: rgb(102, 102, 102); font: 14px / 21px Microsoft YaHei; padding: 10px; top: 0px; left: 0px; transform: translate3d(284px, 250px, 0px); border-color: rgb(250, 200, 88); pointer-events: none; visibility: hidden; opacity: 0;"><div style="margin: 0px 0 0;line-height:1;"><div style="font-size:14px;color:#666;font-weight:400;line-height:1;">Access From</div><div style="margin: 10px 0 0;line-height:1;"><div style="margin: 0px 0 0;line-height:1;"><span style="display:inline-block;margin-right:4px;border-radius:10px;width:10px;height:10px;background-color:#fac858;"></span><span style="font-size:14px;color:#666;font-weight:400;margin-left:2px">Email</span><span style="float:right;margin-left:20px;font-size:14px;color:#666;font-weight:900">580</span><div style="clear:both"></div></div><div style="clear:both"></div></div><div style="clear:both"></div></div></div></div>
+          
+          <script>
+            document.addEventListener("DOMContentLoaded", () => {
+              const ramChart = echarts.init(document.querySelector("#pieChart"))
+
+              function updateChartWithRamData(ramData) {
+                // Assuming ramData is an array with RAM usage values
+        
+                ramChart.setOption({
+                    series: [{
+                        data: ramData.map(value => ({
+                            value,
+                            name: `RAM Usage ${value}` // Using RAM usage values from the fetched data
+                        }))
+                    }]
+                });
+            }
+            
+              ramChart.setOption({
+                title: {
+                  text: 'Referer of a Website',
+                  subtext: 'Fake Data',
+                  left: 'center'
+                },
+                tooltip: {
+                  trigger: 'item'
+                },
+                legend: {
+                  orient: 'vertical',
+                  left: 'left'
+                },
+                series: [{
+                  name: 'Access From',
+                  type: 'pie',
+                  radius: '50%',
+                  data: [{
+                      value: 1048,
+                      name: 'Search Engine'
+                    },
+                    {
+                      value: 735,
+                      name: 'Direct'
+                    }, 
+                  ],
+                  emphasis: {
+                    itemStyle: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                  }
+                }]
+              });
+            });
+          </script>
+          <!-- End Pie Chart -->
+
+        </div>
+      </div>
+    </div>
 
     <div class="pagetitle">
       <h1>Dashboard</h1>
@@ -14,6 +81,7 @@
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
+      
       <div class="row">
 
         <!-- Left side columns -->
@@ -588,6 +656,7 @@
             </div>
           </div><!-- End Website Traffic -->
 
+          
           <!-- News & Updates Traffic -->
           <div class="card">
             <div class="filter">
@@ -646,9 +715,30 @@
 
       </div>
     </section>
-
+    <div id="system-graphs">
+      <h2>System Information Graphs</h2>
+      <div id="cpu-graph">
+          <h3>CPU Usage</h3>
+          <img id="cpu-image" src="" alt="CPU Usage">
+      </div>
+      <div id="storage-graph">
+          <h3>Storage Usage</h3>
+          <img id="storage-image" src="" alt="Storage Usage">
+      </div>
+      <div id="ram-graph">
+          <h3>RAM Usage</h3>
+          <img id="ram-image" src="" alt="RAM Usage">
+      </div>
+  </div>
   </main><!-- End #main -->
   {% endblock body %}
   
+{% block scripts %}
+
+<script src = "{% static "core/js/sysinfo.js" %}"></script>
+
+{% endblock scripts %}
+
+
 
   
