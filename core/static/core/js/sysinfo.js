@@ -1,5 +1,20 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
+    function shiftCharacters(arr, newVariable) {
+        let lastIndex = arr.length - 1;
+      
+        for (let i = 0; i < lastIndex; i++) {
+          arr[i] = arr[i + 1];
+        }
+      
+        arr[lastIndex - 1] = newVariable;
+        arr.pop(); // Remove the last element
+      
+        return arr;
+      }
+
+
+
     async function getRam() {
         const response = await fetch("/api/sysinfo/ram", {
           method: "GET",
@@ -63,70 +78,43 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
       //Cpu area graph
-
-
-	
-
-      var ctx = document.getElementById('stackedArea').getContext('2d');
-      var myChart = new Chart(ctx, {
+     
+        const data = [0,0,0,0,0]
+        const maxValue = Math.max.apply(null, data)
+        new Chart(document.querySelector('#lineChart'), {
           type: 'line',
           data: {
-              labels: ['10s', '8s', '6s', '4s', '2s'],
-              datasets: [{
-                  label: 'CPU usage',
-                  data: [0, 20, 40, 10, 15],
-                  backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                  borderColor: 'rgba(75, 192, 192, 1)',
-                  borderWidth: 2,
-                  fill: true,
-              }, ]
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+              label: 'Line Chart',
+              data: [20, 30, 80, 15, 5, 4, 55],
+              fill: true,
+              borderColor: 'rgb(75, 192, 192)',
+              tension: 0.1
+            }]
           },
           options: {
-              scales: {
-                  y: {
-                      title: {
-                          display: true,
-                          text: 'Percentage %'
-                      },
-                      ticks: {
-                          beginAtZero: true,
-                          stepSize: 20,
-                          suggestedMax: 100, // Use suggestedMax instead of max
-                          formatter: function(value) {
-                              return value + '%';
-                          }
-                      }
-                  },
-                  x: {
-                      stacked: true
+            scales: {
+              y: {
+                beginAtZero: true,
+                min: 0,
+                max: 100,
+                stepSize: 20,
+                ticks: {
+                  stepSize: 20,
+                  callback: function (value) {
+                    return value; // This ensures only specified values (0, 20, 40, 60, 80, 100) are shown on the y-axis
                   }
-              },
-              layout: {
-                  padding: {
-                      left: 20,
-                      right: 20,
-                      top: 20,
-                      bottom: 20
-                  }
-              },
-              plugins: {
-                  legend: {
-                      position: 'top',
-                  },
+                }
               }
+            }
           }
-      }); 
-
-    let cpuArr = myChart.data.datasets[0].data
-    console.log(myChart.data.datasets[0].data)
-    cpuArr[0] = 100
-    myChart.data.datasets[0].data[1] = cpuArr
-    console.log(cpuArr[0])
-    cpuArr[1] = 80
-    myChart.update()
+        });
+        
 
 
 
-
+    
+     
       //end of the DOM
-  });
+    });
