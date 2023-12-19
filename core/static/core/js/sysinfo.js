@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           usedRam: data["usedRAM"],
         };
       }
-
+        //initializing initual values of RAM GRAPH so it won't be empty
         async function InitalRAM(){
         const ramData = await getRam();
         const freeRam = ramData.freeRam;
