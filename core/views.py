@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from HomeWall.settings import LOGIN_URL
 from accounts.models import User
-# Create your views here.
+
+
 
 @staff_member_required(login_url=LOGIN_URL)
 def index(request):
@@ -18,3 +19,4 @@ def users(request):
     users = User.objects.all()
     context = {"users":users}
     return render(request, "core/users.html", context)
+
