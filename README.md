@@ -1,4 +1,4 @@
-#Starting
+# Starting
 
 1. First step is to install all dependencies `pip install -r requirements.txt`
 2. Make migrations `python manage.py makemigrations accounts`
