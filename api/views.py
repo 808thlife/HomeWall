@@ -59,5 +59,5 @@ def get_ram_usage(request):
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def get_cpu_usage(request):
-    cpu_usage = cpu_usage()
+    cpu_usage = sysinfo.cpu_usage()
     return Response({"usageCPU": cpu_usage}, status=status.HTTP_200_OK)

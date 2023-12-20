@@ -1,19 +1,18 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
     function shiftCharacters(arr, newVariable) {
-        let lastIndex = arr.length - 1;
+        let lastIndex = arr.length;
       
         for (let i = 0; i < lastIndex; i++) {
           arr[i] = arr[i + 1];
         }
       
         arr[lastIndex - 1] = newVariable;
-        arr.pop(); // Remove the last element
+        
       
         return arr;
       }
-
-
+      
 
     async function getRam() {
         const response = await fetch("/api/sysinfo/ram", {
@@ -30,14 +29,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         const ramData = await getRam();
         const freeRam = ramData.freeRam;
         const usedRam = ramData.usedRam;
-        cpuChart.data.datasets[0].data[0] = freeRam;
-        cpuChart.data.datasets[0].data[1] = usedRam;
-        cpuChart.update();
+        ramChart.data.datasets[0].data[0] = freeRam;
+        ramChart.data.datasets[0].data[1] = usedRam;
+        ramChart.update();
         }
         
         InitalRAM();
         
-    let cpuChart = new Chart(document.querySelector('#pieChart'), {
+    let ramChart = new Chart(document.querySelector('#pieChart'), {
       type: 'pie',
       data: {
         labels: [
@@ -45,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           'Used RAM',
         ],
         datasets: [{
-          label: 'My First Dataset',
+          label: 'RAM Usage in GB',
           data: [50,100],
           backgroundColor: [
             'rgb(50, 255, 100)',
@@ -56,38 +55,43 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
 
-      
+    
 
     setInterval(() => {
         getRam().then(ramData => {
           const freeRam = ramData.freeRam;
           const usedRam = ramData.usedRam;
-          cpuChart.data.datasets[0].data[0] = freeRam;
-          cpuChart.data.datasets[0].data[1] = usedRam;
-          cpuChart.update();
+          ramChart.data.datasets[0].data[0] = freeRam;
+          ramChart.data.datasets[0].data[1] = usedRam;
+          ramChart.update();
         });
       }, 2000);
       
 
 
       // CPU usage
+      async function getCpu() {
+        const response = await fetch("/api/sysinfo/cpu", {
+          method: "GET",
+        });
+        const data = await response.json();
+        return {
+          cpuPercentage: data["usageCPU"],
+        };
+      }
 
-
-
-
-
+      
 
       //Cpu area graph
      
-        const data = [0,0,0,0,0]
-        const maxValue = Math.max.apply(null, data)
-        new Chart(document.querySelector('#lineChart'), {
+        const cpuDataChart = [0,0,0,0,0,0,0]
+        let cpuChart = new Chart(document.querySelector('#lineChart'), {
           type: 'line',
           data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            labels: ['15s', '10s','8s', '6s', '4s', '2s', 'Now'],
             datasets: [{
               label: 'Line Chart',
-              data: [20, 30, 80, 15, 5, 4, 55],
+              data: cpuDataChart,
               fill: true,
               borderColor: 'rgb(75, 192, 192)',
               tension: 0.1
@@ -111,9 +115,16 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
         });
         
+      
 
-
-
+      setInterval(() => {
+        getCpu().then(cpuData => {
+          let cpuPercentage = cpuData.cpuPercentage;
+          let data = cpuChart.data.datasets[0].data 
+          shiftCharacters(data, cpuPercentage) 
+          cpuChart.update();
+        });
+      }, 2000);
     
      
       //end of the DOM
