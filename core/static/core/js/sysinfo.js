@@ -93,6 +93,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               label: 'Line Chart',
               data: cpuDataChart,
               fill: true,
+              fillColor : "#4d70a8",
               borderColor: 'rgb(75, 192, 192)',
               tension: 0.1
             }]
@@ -115,7 +116,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
         });
         
-      
+        cpuChart.canvas.addEventListener('click', () => {
+          localStorage.setItem('graphState', JSON.stringify({
+            zoomLevel: cpuChart.chart.getZoom(),
+            selectedPoints: cpuChart.getElementsAtEventForMode(
+              cpuChart.chart.panMode,
+              'nearest',
+              event,
+              false
+            )
+          }));
+        });
 
       setInterval(() => {
         getCpu().then(cpuData => {

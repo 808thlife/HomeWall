@@ -3,7 +3,7 @@
 {% block body %}
   <main id="main" class="main">
     
-    <div class="col-lg-6">
+    {% comment %} <div class="col-lg-6">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Line Chart</h5>
@@ -14,7 +14,7 @@
 
         </div>
       </div>
-    </div>
+    </div> {% endcomment %}
 
     <div class="col-lg-6">
       <div class="card">
@@ -175,16 +175,15 @@
                 </div>
                   
                 <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
+                  
 
                   <!-- Line Chart -->
-                  <canvas id="stackedArea"
-                      width="800"
-                      height="350"> 
-                  </canvas> 
+                  <!--CPU USAGE GRAPH-->
+                 <h5 class="card-title">CPU Usage Chart</h5>
 
-                  
-     
+                        <!-- Line Chart -->
+                        <canvas id="lineChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 234px; width: 469px;" width="469" height="234"></canvas>
+                        <!-- End Line CHart -->
                   <!-- End Line Chart -->
 
                 </div>
