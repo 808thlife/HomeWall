@@ -3,18 +3,7 @@
 {% block body %}
   <main id="main" class="main">
     
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Line Chart</h5>
-
-          <!-- Line Chart -->
-          <canvas id="lineChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 234px; width: 469px;" width="469" height="234"></canvas>
-          <!-- End Line CHart -->
-
-        </div>
-      </div>
-    </div>
+    
 
     <div class="col-lg-6">
       <div class="card">
@@ -178,10 +167,9 @@
                   <h5 class="card-title">Reports <span>/Today</span></h5>
 
                   <!-- Line Chart -->
-                  <canvas id="stackedArea"
-                      width="800"
-                      height="350"> 
-                  </canvas> 
+                  <!-- Line Chart -->
+          <canvas id="lineChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 234px; width: 469px;" width="469" height="234"></canvas>
+          <!-- End Line CHart -->
 
                   
      
@@ -629,21 +617,7 @@
 
       </div>
     </section>
-    <div id="system-graphs">
-      <h2>System Information Graphs</h2>
-      <div id="cpu-graph">
-          <h3>CPU Usage</h3>
-          <img id="cpu-image" src="" alt="CPU Usage">
-      </div>
-      <div id="storage-graph">
-          <h3>Storage Usage</h3>
-          <img id="storage-image" src="" alt="Storage Usage">
-      </div>
-      <div id="ram-graph">
-          <h3>RAM Usage</h3>
-          <img id="ram-image" src="" alt="RAM Usage">
-      </div>
-  </div>
+
   </main><!-- End #main -->
   {% endblock body %}
   

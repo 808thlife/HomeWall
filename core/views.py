@@ -20,3 +20,5 @@ def users(request):
     context = {"users":users}
     return render(request, "core/users.html", context)
 
+def user_profile(request, id):
+    return render(request, "core/users-profile.html")
