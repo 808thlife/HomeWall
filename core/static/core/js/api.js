@@ -1,9 +1,4 @@
-function callAlert(alert){
-  alert.style.display = "block";
-  window.onload = setTimeout(function(){
-    alert.style.display = "none";
- }, 4000);
-}
+
 
 
 
@@ -23,6 +18,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
+//Initializing alerts
 const error_field = document.querySelector("#unique-user-error")
 error_field.style.display = "none";
 //Creating user API
@@ -37,6 +33,7 @@ delete_alert.style.display = "none";
 alert.style.display = "none";
 edit_alert.style.display = "none";
 // listents to save button
+//Creates a use
 add_user_button.addEventListener("click", (event)=>{
     let username = document.querySelector("#add-username").value;
     let role = document.querySelector("#add-role-option").value;
