@@ -1245,3 +1245,42 @@ i{
 .alert{
   display: none;
 }
+
+
+/* Styling for Search Bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px; /* Adjust padding as needed */
+}
+
+/* Styling for Search Form */
+.search-form {
+  position: relative;
+}
+
+/* Styling for Search Input */
+.search-form input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px; /* Adjust width as needed */
+}
+
+.search-form button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 10px;
+  background-color: transparent; /* Set background color to transparent */
+  border: none;
+  border-radius: 0 5px 5px 0;
+  color: #007bff; /* Example color; adjust as needed */
+  cursor: pointer;
+}
+
+/* Styling for Search Icon */
+.search-form button i {
+  font-size: 1.2em;
+}
+
