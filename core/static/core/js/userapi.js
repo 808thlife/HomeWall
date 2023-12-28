@@ -19,7 +19,7 @@ function getCookie(name) {
 }
 
 //Initializing alerts
-const error_field = document.querySelector("#unique-user-error")
+let error_field = document.querySelector("#unique-user-error")
 error_field.style.display = "none";
 //Creating user API
 const add_user_button = document.querySelector("#add-user-button");
