@@ -27,6 +27,8 @@
             <th scope="col">IP Version</th>
             <th scope="col">Actions</th>
             <th scope="col">Translate To</th>
+            <th scope="col">Edit</th>
+            <th scope = "col">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -46,12 +48,64 @@
             <td>test</td>
             <td>test</td>
             <td>test</td>
+            
+            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#editRule">
+              <i class = "bi bi-pencil"></i>
+            </button></td>
+            <td><button type = "button" class = "btn btn-danger">
+              <i class = "bi bi-trash"></i>
+            </button></td>
           </tr>
           
         </tbody>
       </table>
       <!-- End Dark Table -->
+      <!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addRule">
+  Add Rule
+</button>
 
+            <!-- Modal for adding rule -->
+          <div class="modal fade" id="addRule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addRuleLabel">Add Rule</h5>
+                  <button type="button" class="btn btn-light close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class = "bi bi-x-lg"></i></span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Modal window for editing rules-->
+          <div class="modal fade" id="editRule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="editRuleLabel">Edit Rule</h5>
+                  <button type="button" class="btn btn-light close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class = "bi bi-x-lg"></i></span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
   </div>
 
