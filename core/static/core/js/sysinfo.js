@@ -115,18 +115,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
           }
         });
-        
-        cpuChart.canvas.addEventListener('click', () => {
-          localStorage.setItem('graphState', JSON.stringify({
-            zoomLevel: cpuChart.chart.getZoom(),
-            selectedPoints: cpuChart.getElementsAtEventForMode(
-              cpuChart.chart.panMode,
-              'nearest',
-              event,
-              false
-            )
-          }));
-        });
+        //cashingg
+        // cpuChart.canvas.addEventListener('click', () => {
+        //   localStorage.setItem('graphState', JSON.stringify({
+        //     zoomLevel: cpuChart.chart.getZoom(),
+        //     selectedPoints: cpuChart.getElementsAtEventForMode(
+        //       cpuChart.chart.panMode,
+        //       'nearest',
+        //       event,
+        //       false
+        //     )
+        //   }));
+        // });
 
       setInterval(() => {
         getCpu().then(cpuData => {
