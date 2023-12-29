@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         let cpuChart = new Chart(document.querySelector('#lineChart'), {
           type: 'line',
           data: {
-            labels: ['15s', '10s','8s', '6s', '4s', '2s', 'Now'],
+            labels: ['12s', '10s','8s', '6s', '4s', '2s', 'Now'],
             datasets: [{
               label: 'Line Chart',
               data: cpuDataChart,
