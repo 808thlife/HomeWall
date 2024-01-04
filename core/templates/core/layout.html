@@ -226,7 +226,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="{% url "core:userProfile" request.user.id%}">
+              <a class="dropdown-item d-flex align-items-center" href="{% url "core:user_profile" request.user.id%}">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -294,9 +294,15 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url "core:rulesView" %}">
+        <a class="nav-link collapsed" href="{% url "core:rules_view" %}">
           <i class="bi bi-shield-lock"></i>
           <span>Firewall Rules</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url "core:dhcp_view" %}">
+          <i class="bi bi-hdd-network"></i>
+          <span>DHCP</span>
         </a>
       </li>
       <li class="nav-item">
