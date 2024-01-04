@@ -43,7 +43,7 @@
                 <td>test ip</td>
                 
                 
-                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#editRule">
+                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#editAction">
                 <i class = "bi bi-pencil"></i>
                 </button></td>
                 <td><button type = "button" class = "btn btn-danger">
@@ -105,22 +105,47 @@
                 </div>
             </div>
 
-            <!--Modal window for editing rules-->
-            <div class="modal fade" id="editRule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!--Modal window for editing dhcp actions-->
+            <div class="modal fade" id="editAction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h5 class="modal-title" id="editRuleLabel">Edit Rule</h5>
+                    <h5 class="modal-title" id="editActionLabel">Add Action</h5>
                     <button type="button" class="btn btn-light close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class = "bi bi-x-lg"></i></span>
                     </button>
                     </div>
                     <div class="modal-body">
-                    ...
+                        <form>
+                            <div class="form-row">
+                            <div class="col">
+                                <label for="dhcp-name">Name</label>
+                                <input type="text" class="form-control" name = "dhcp-name" placeholder="Name">
+                            </div>
+                            </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="dhcp-start-ip">Start IP</label>
+                                        <input type="text" class="form-control" name = "dhcp-start-ip" placeholder="Start IP">
+                                    </div>
+                                </div>
+                            <div class="form-row">
+                                <div class="col">
+                                    <label for="dhcp-end-ip">End IP</label>
+                                    <input type="text" class="form-control" name = "dhcp-end-ip" placeholder="End IP">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
+                                    <label for="dhcp-mask">Mask</label>
+                                    <input type="text" class="form-control" name = "dhcp-mask" placeholder="Mask">
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-success">Add</button>
                     </div>
                 </div>
                 </div>
