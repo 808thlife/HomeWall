@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         let cpuChart = new Chart(document.querySelector('#lineChart'), {
           type: 'line',
           data: {
-            labels: ['15s', '10s','8s', '6s', '4s', '2s', 'Now'],
+            labels: ['12s', '10s','8s', '6s', '4s', '2s', 'Now'],
             datasets: [{
               label: 'Line Chart',
               data: cpuDataChart,
@@ -115,18 +115,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
           }
         });
-        
-        cpuChart.canvas.addEventListener('click', () => {
-          localStorage.setItem('graphState', JSON.stringify({
-            zoomLevel: cpuChart.chart.getZoom(),
-            selectedPoints: cpuChart.getElementsAtEventForMode(
-              cpuChart.chart.panMode,
-              'nearest',
-              event,
-              false
-            )
-          }));
-        });
+        //cashingg
+        // cpuChart.canvas.addEventListener('click', () => {
+        //   localStorage.setItem('graphState', JSON.stringify({
+        //     zoomLevel: cpuChart.chart.getZoom(),
+        //     selectedPoints: cpuChart.getElementsAtEventForMode(
+        //       cpuChart.chart.panMode,
+        //       'nearest',
+        //       event,
+        //       false
+        //     )
+        //   }));
+        // });
 
       setInterval(() => {
         getCpu().then(cpuData => {

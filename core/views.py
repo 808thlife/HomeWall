@@ -20,5 +20,10 @@ def users(request):
     context = {"users":users}
     return render(request, "core/users.html", context)
 
+@staff_member_required(login_url=LOGIN_URL)
 def user_profile(request, id):
     return render(request, "core/users-profile.html")
+
+@staff_member_required(login_url=LOGIN_URL)
+def dhcp_view(request):
+    return render(request, "core/dhcp.html")
