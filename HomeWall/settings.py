@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core',
     'api',
     'accounts',
+    'dhcp',
     'rest_framework',
 ]
 
