@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+import requests
 from HomeWall.settings import LOGIN_URL
 from accounts.models import User
 
@@ -8,6 +9,7 @@ from accounts.models import User
 
 @staff_member_required(login_url=LOGIN_URL)
 def index(request):
+    response = requests.get("http://localhost:8888/")
     return render(request, "core/index.html")
 
 @staff_member_required(login_url=LOGIN_URL)
