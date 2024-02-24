@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+app_name = "dhcp"
+
 urlpatterns = [
-    # path("", views.show_assigned_ips, name = "dhcp")
+    path("", views.change_dhcp_form, name = "change_dhcp")
 ]
