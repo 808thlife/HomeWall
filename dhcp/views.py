@@ -3,7 +3,7 @@ from .utils import edit_dnsmasq_conf
 
 def change_dhcp_form(request):
     if request.method == "POST":
-        start_value = request.POST["dhcp-start"] # 1 It can't start with 0 because it was already taken by the address
+        start_value = request.POST["dhcp-start"] # 1 It can't start with 0 because it was already taken by the address field in conf file
         ending_value = request.POST["dhcp-end"] #254
         address = request.POST["dhcp-address"] #  192.168.1.0 for instance
         try:
