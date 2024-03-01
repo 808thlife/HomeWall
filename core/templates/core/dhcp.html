@@ -77,8 +77,9 @@
                         type="text"
                         class="form-control"
                         name="dhcp-start"
-                        placeholder="IP starting value"
-                    />
+                        placeholder="IP starting value (e.g. 1)"
+                        value = "{{start}}"
+                        />
                 </div>
                 <div class="col">
                     <label for="dhcp-name"
@@ -88,7 +89,8 @@
                         type="text"
                         class="form-control"
                         name="dhcp-end"
-                        placeholder="IP ending value"
+                        placeholder="IP ending value (e.g. 254)"
+                        value = "{{end}}"
                     />
                 </div>
                 <div class="col">
@@ -97,7 +99,8 @@
                         type="text"
                         class="form-control"
                         name="dhcp-address"
-                        placeholder="Address"
+                        placeholder="Address (e.g. 192.168.1.0)"
+                        value = "{{address}}"
                     />
                 </div>
                 <button class="btn btn-primary">Submit</button>

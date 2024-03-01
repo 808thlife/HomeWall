@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from dhcp.utils import *
 from HomeWall.settings import LOGIN_URL
 from accounts.models import User
 
@@ -25,4 +26,11 @@ def user_profile(request, id):
 
 @staff_member_required(login_url=LOGIN_URL)
 def dhcp_view(request):
-    return render(request, "core/dhcp.html")
+    values = parse_config("./dhcp/dnsmasq.conf")
+    print(values)
+
+    address = values["address"]
+    start_ip = values["start"]
+    end_ip = values["end"]
+    context = {"address": address, "start":start_ip, "end":end_ip}
+    return render(request, "core/dhcp.html", context)
