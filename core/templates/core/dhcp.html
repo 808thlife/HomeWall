@@ -94,6 +94,25 @@
                     />
                 </div>
                 <div class="col">
+                    <label for="dhcp-mask">Mask </label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="dhcp-mask"
+                        placeholder="Type in the Mask"
+                        value = "{{dhcp_mask}}"
+                        />
+                </div>
+                <div class="col">
+                    <label for="dhcp-reset-time">Reset time</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="dhcp-reset-time"
+                        placeholder="Type in the value (in hours)"
+                        value = "{{restart_time}}"/>      
+                </div>
+                <div class="col">
                     <label for="dhcp-name">Address</label>
                     <input
                         type="text"
@@ -141,8 +160,7 @@
                                             type="text"
                                             class="form-control"
                                             name="dhcp-name"
-                                            placeholder="Name"
-                                        />
+                                            placeholder="Name"/>
                                     </div>
                                 </div>
                                 <div class="form-row">
