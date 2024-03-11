@@ -11,7 +11,7 @@ def change_dhcp_form(request):
         mask = request.POST["dhcp-mask"]
         reset_time =  request.POST["dhcp-reset-time"]
         try:
-            edit_dnsmasq_conf(f"{address}.{start_value},{address}.{ending_value},{mask},{reset_time}", f"{address}", "./dhcp/dnsmasq.conf" )
+            edit_dnsmasq_conf(f"{start_value}, {ending_value},{mask},{reset_time}", f"{address}", "./dhcp/dnsmasq.conf" )
         except FileNotFoundError:
             print("file was not found")
     return HttpResponseRedirect(reverse("core:dhcp_view"))
