@@ -27,10 +27,13 @@ def user_profile(request, id):
 @staff_member_required(login_url=LOGIN_URL)
 def dhcp_view(request):
     values = parse_config("./dhcp/dnsmasq.conf")
-    print(values)
 
     address = values["address"]
-    start_ip = values["start"]
-    end_ip = values["end"]
-    context = {"address": address, "start":start_ip, "end":end_ip}
+    start_ip = values["start_ip"]
+    end_ip = values["end_ip"]
+    mask = values["mask"]
+    restart_time = values["restart_time"]
+    print(restart_time)
+    context = {"address": address, "start":start_ip, 
+    "end":end_ip, "dhcp_mask":mask, "restart_time": restart_time}
     return render(request, "core/dhcp.html", context)
