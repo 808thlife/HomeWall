@@ -5,7 +5,7 @@ import socket
 def scan_network():
     # Define the IP range to scan
     # values = parse_config()
-    # address = 
+    # address = values["address"]
     target_ip = "20.20.20.1/24"  # Example subnet, adjust according to your network
 
     # Perform ARP scan
