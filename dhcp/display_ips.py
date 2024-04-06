@@ -1,10 +1,12 @@
-
+from utils import parse_config
 from scapy.all import ARP, Ether, srp
 import socket
 
 def scan_network():
     # Define the IP range to scan
-    target_ip = "192.168.1.0/24"  # Example subnet, adjust according to your network
+    # values = parse_config()
+    # address = 
+    target_ip = "20.20.20.1/24"  # Example subnet, adjust according to your network
 
     # Perform ARP scan
     arp_request = ARP(pdst=target_ip)
