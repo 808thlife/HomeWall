@@ -12,9 +12,9 @@ def create(request):
         # Create a rule object
         #rule = iptc.Rule()
 
-        table = request.POST["table"] # filter by default
-        chain = request.POST["chain"]
-        rule = request.POST["rule"]
+        table = request.POST.get("table", "filter")  # Default to "filter" table if not provided
+        chain = request.POST.get("chain", "INPUT")   # Default to "INPUT" chain if not provided
+        rule = request.POST.get("rule", "")          # Default to empty rule
 
         print(f"table {table}, chain {chain}, rule {rule}")
 
