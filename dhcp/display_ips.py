@@ -1,4 +1,4 @@
-from utils import parse_config
+from .utils import parse_config
 from scapy.all import ARP, Ether, srp
 import socket
 

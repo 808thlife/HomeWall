@@ -76,11 +76,27 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  ...
+                  <form action="{% url "iptables:create" %}" method = "post">
+                    {% csrf_token %}
+                    <label for="table">Table: </label>
+                    <select class="form-select" name = "table" multiple aria-label="select example">
+                      <option value = "Filter" selected>Filter</option>
+                    </select> 
+
+                    <label for="chain">Chain: </label>
+                    <select class="form-select" name = "chain" multiple aria-label="select example">
+                      <option value = "INPUT" selected>INPUT</option>
+                      <option value = "FORWARD" >FORWARD</option>
+                      <option value = "OUTPUT" >OUTPUT</option>
+                    </select> 
+                    
+                    <label for="rule">Rule Specification: </label>
+                    <input type="text" class = "form-control" name = "rule" placeholder = "-s 192.168.1.0/24 -p tcp --dport 80 -j ACCEPT" name="" id=""><br>
+                    <button type="submit" class="btn btn-success">Save</button>
+                  </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
               </div>
             </div>
