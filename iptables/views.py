@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import IptablesRule
 
 # Create your views here.
 
@@ -11,13 +12,21 @@ def create(request):
     
         # Create a rule object
         #rule = iptc.Rule()
-
-        table = request.POST.get("table", "filter")  # Default to "filter" table if not provided
+        name = request.POST.get("name", "empty name")
+        type = request.POST.get("table", "filter")  # Default to "filter" table if not provided
         chain = request.POST.get("chain", "INPUT")   # Default to "INPUT" chain if not provided
-        rule = request.POST.get("rule", "")          # Default to empty rule
+        action = request.POST.get("action", "empty")         # Default to empty rule
+        source_ip = request.POST.get("source_ip", "empty")
+        destination_ip = request.POST.get("destination_ip", "empty")
+        port = request.POST.get("port", 8000)
+        protocol = request.POST.get("protocol", "empty")
 
-        print(f"table {table}, chain {chain}, rule {rule}")
+        #your code.
 
+        f = IptablesRule(name = name, type = type, chain = chain, action = action, 
+                        source_ip = source_ip, destination_ip = destination_ip,
+                        port = port, protocol = protocol)
+        f.save()
         # Commit the changes
         #iptc.easy.commit()
     

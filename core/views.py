@@ -4,6 +4,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from dhcp.utils import *
 from HomeWall.settings import LOGIN_URL
 from accounts.models import User
+from iptables.models import IptablesRule
 from dhcp.display_ips import scan_network
 
 @staff_member_required(login_url=LOGIN_URL)
@@ -12,7 +13,9 @@ def index(request):
 
 @staff_member_required(login_url=LOGIN_URL)
 def rulesView(request):
-    return render(request, "core/rules.html")
+    rules = IptablesRule.objects.all()
+    context = {"rules":rules}
+    return render(request, "core/rules.html", context)
 
 @staff_member_required(login_url=LOGIN_URL)
 def users(request):

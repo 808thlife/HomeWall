@@ -19,42 +19,42 @@
         <thead>
           <tr>
             
-            <th scope="col"><i class = "icon bi-check-circle"></i></th>
             <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Action</th>
+            <th scope="col">Chain</th>
             <th scope="col">Source</th>
-            <th scope="col">Assignment</th>
-            <th scope="col">Service</th>
-            <th scope="col">IP Version</th>
-            <th scope="col">Actions</th>
-            <th scope="col">Translate To</th>
-            <th scope="col">Edit</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Port</th>
+            <th scope="col">Protocol</th>
+            <th scope = "col">Edit</th>
             <th scope = "col">Delete</th>
           </tr>
         </thead>
         <tbody>
+          {% for rule in rules %}
+
           <tr>
-            <th scope="row">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                <label class="form-check-label" for="flexCheckChecked">
-                  
-                </label>
-              </div>
-            </th>
-            <td>test name</td>
-            <td>test source</td>
-            <td>test ip</td>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
-            
+            <td>{{rule.name}}</td>
+            <td>{{rule.type}}</td>
+            <td>{{rule.action}}</td>
+            <td>{{rule.chain}}</td>
+            <td>{{rule.source_ip}}</td>
+            <td>{{rule.destination_ip}}</td>
+            <td>{{rule.port}}</td>
+            <td>{{rule.protocol}}</td>
             <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#editRule">
               <i class = "bi bi-pencil"></i>
             </button></td>
             <td><button type = "button" class = "btn btn-danger">
               <i class = "bi bi-trash"></i>
             </button></td>
+          </tr>
+          
+            {% endfor %}
+            
+            
+            
           </tr>
           
         </tbody>
@@ -78,6 +78,9 @@
                 <div class="modal-body">
                   <form action="{% url "iptables:create" %}" method = "post">
                     {% csrf_token %}
+                    <label for="name">Rule Name: </label>
+                    <input type="text" class = "form-control" name="name" placeholder="Enter a descriptive name"><br>
+
                     <label for="table">Table: </label>
                     <select class="form-select" name = "table" multiple aria-label="select example">
                       <option value = "filter" selected>Filter</option>
@@ -89,11 +92,33 @@
                       <option value = "FORWARD" >FORWARD</option>
                       <option value = "OUTPUT" >OUTPUT</option>
                     </select> 
+                  
                     
-                    <label for="rule">Rule Specification: </label>
-                    <input type="text" class = "form-control" name = "rule" placeholder = "-s 192.168.1.0/24 -p tcp --dport 80 -j ACCEPT" name="" id=""><br>
+                  
+                    <label for="action">Rule Action: </label>
+                    <select class="form-select" name="action" aria-label="select example">
+                      <option value="DROP">DROP</option>
+                      <option value="MASQUERADE">MASQUERADE</option>
+                      </select><br>
+                  
+                    <label for="source_ip">Source IP Address: </label>
+                    <input type="text" class = "form-control" name="source_ip" placeholder="e.g., 192.168.1.0/24"><br>
+                  
+                    <label for="destination_ip">Destination IP Address: </label>
+                    <input type="text" class = "form-control" name="destination_ip" placeholder="e.g., 8.8.8.8"><br>
+                  
+                    <label for="port">Port Number: </label>
+                    <input type="number" class = "form-control" name="port" placeholder="Optional"><br>
+                  
+                    <label for="protocol">Protocol: </label>
+                    <select class="form-select" name="protocol" aria-label="select example">
+                      <option value="TCP">TCP</option>
+                      <option value="UDP">UDP</option>
+                      </select><br>
+                  
                     <button type="submit" class="btn btn-success">Save</button>
                   </form>
+                  
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
