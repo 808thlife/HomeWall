@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .models import IptablesRule
 
 # Create your views here.
@@ -31,9 +32,10 @@ def create(request):
         #iptc.easy.commit()
     
         # Return success response
-        return HttpResponse("Rule created successfully")
+        return HttpResponseRedirect(reverse("core:rules_view"))
+        #return HttpResponse("Rule created successfully")
 
-def edit(request):
+def edit(request, ID):
     # Get parameters from the request
     # Example: table, chain, rule_index, new_rule_spec
     
@@ -53,10 +55,34 @@ def edit(request):
     # Commit the changes
     # Example: iptc.easy.commit()
     
-    # Return success response
-    return HttpResponse("Rule edited successfully")
+    name = request.POST.get("name", "empty name")
+    type = request.POST.get("table", "filter")  # Default to "filter" table if not provided
+    chain = request.POST.get("chain", "INPUT")   # Default to "INPUT" chain if not provided
+    action = request.POST.get("action", "empty")         # Default to empty rule
+    source_ip = request.POST.get("source_ip", "empty")
+    destination_ip = request.POST.get("destination_ip", "empty")
+    port = request.POST.get("port", 8000)
+    protocol = request.POST.get("protocol", "empty")
 
-def delete(request):
+    #editing
+    rule = IptablesRule.objects.get(id = ID)
+
+    rule.name = name
+    rule.type = type
+    rule.chain = chain
+    rule.action = action
+    rule.source_ip = source_ip
+    rule.destination_ip = destination_ip
+    rule.port = port
+    rule.protocol = protocol
+    
+    rule.save()
+
+    # Return success response
+    return HttpResponseRedirect(reverse("core:rules_view"))
+
+
+def delete(request, ID):
     # Get parameters from the request
     # Example: table, chain, rule_index
     
@@ -70,4 +96,6 @@ def delete(request):
     # Example: iptc.easy.commit()
     
     # Return success response
-    return HttpResponse("Rule deleted successfully")
+    rule = IptablesRule.objects.get(id = ID)
+    rule.delete()
+    return HttpResponseRedirect(reverse("core:rules_view"))

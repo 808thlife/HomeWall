@@ -43,14 +43,103 @@
             <td>{{rule.destination_ip}}</td>
             <td>{{rule.port}}</td>
             <td>{{rule.protocol}}</td>
-            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#editRule">
+            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#editRule{{rule.id}}">
               <i class = "bi bi-pencil"></i>
             </button></td>
-            <td><button type = "button" class = "btn btn-danger">
-              <i class = "bi bi-trash"></i>
-            </button></td>
+            <form action="{% url "iptables:delete" rule.id %}" method = "post">
+              <td><button type = "button" class = "btn btn-danger">
+                <i class = "bi bi-trash"></i>
+              </button></td>
+              {% csrf_token %}
+            </form>
+            
           </tr>
           
+                  <!--Modal window for editing rules-->
+          <div class="modal fade" id="editRule{{rule.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="editRule{{rule.id}}Label">Edit Rule</h5>
+                  <button type="button" class="btn btn-light close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class = "bi bi-x-lg"></i></span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="{% url "iptables:edit" rule.id%}" method = "post">
+                    {% csrf_token %}
+                    <label for="name">Rule Name: </label>
+                    <input type="text" class = "form-control" name="name" value = "{{rule.name}}" placeholder="Enter a descriptive name"><br>
+
+                    <label for="table">Table: </label>
+                    <select class="form-select" name = "table" multiple aria-label="select example">
+                      <option value = "filter" selected>Filter</option>
+                    </select> 
+
+                    <label for="chain">Chain: </label>
+                    <select class="form-select" name = "chain" multiple aria-label="select example">
+                      {% if rule.chain == "INPUT" %}  
+                      <option value = "INPUT" selected>INPUT</option>
+                      <option value = "FORWARD" >FORWARD</option>
+                      <option value = "OUTPUT" >OUTPUT</option>
+                      {% elif rule.chain == "FORWARD" %}
+                      <option value = "INPUT">INPUT</option>
+                      <option value = "FORWARD" selected>FORWARD</option>
+                      <option value = "OUTPUT" >OUTPUT</option>
+                      {% elif rule.chain == "OUTPUT" %}
+                      <option value = "INPUT">INPUT</option>
+                      <option value = "FORWARD">FORWARD</option>
+                      <option value = "OUTPUT" selected>OUTPUT</option>
+                      {% endif %}
+                      
+                    </select> 
+                  
+                    
+                  
+                    <label for="action">Rule Action: </label>
+                    <select class="form-select" name="action" aria-label="select example">
+                      {% if rule.action == "DROP" %}
+                        <option value="DROP" selected>DROP</option>
+                        <option value="MASQUERADE">MASQUERADE</option>
+                      {% elif rule.action == "MASQUERADE" %}
+                        <option value="DROP">DROP</option>
+                        <option value="MASQUERADE" selected>MASQUERADE</option>
+                      {% endif %}
+                      
+                      </select><br>
+                  
+                    <label for="source_ip">Source IP Address: </label>
+                    <input type="text" class = "form-control" value = "{{rule.source_ip}}" name="source_ip" placeholder="e.g., 192.168.1.0/24"><br>
+                  
+                    <label for="destination_ip">Destination IP Address: </label>
+                    <input type="text" class = "form-control" value = "{{rule.destination_ip}}" name="destination_ip" placeholder="e.g., 8.8.8.8"><br>
+                  
+                    <label for="port">Port Number: </label>
+                    <input type="number" class = "form-control" value = "{{rule.port}}" name="port" placeholder="Optional"><br>
+                  
+                    <label for="protocol">Protocol: </label>
+                    <select class="form-select" name="protocol" aria-label="select example">
+                      {% if rule.protocol == "TCP" %}
+                      <option value="TCP" selected>TCP</option>
+                      <option value="UDP">UDP</option>
+                      {% else  %}
+                        <option value="TCP" >TCP</option>
+                        <option value="UDP" selected>UDP</option>
+                      {% endif %}
+                      
+                      </select><br>
+                  
+                    <button type="submit" class="btn btn-success">Save</button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
             {% endfor %}
             
             
@@ -127,26 +216,7 @@
             </div>
           </div>
 
-          <!--Modal window for editing rules-->
-          <div class="modal fade" id="editRule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="editRuleLabel">Edit Rule</h5>
-                  <button type="button" class="btn btn-light close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class = "bi bi-x-lg"></i></span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  ...
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
+          
     </div>
   </div>
 
