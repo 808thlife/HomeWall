@@ -281,12 +281,12 @@
           <span>Dashboard</span>
         </a>
       </li>
-      <li class="nav-item">
+      {% comment %} <li class="nav-item">
         <a class="nav-link collapsed" href="users-profile.html">
           <i class="bi bi-lock"></i>
           <span>Access</span>
         </a>
-      </li>
+      </li> {% endcomment %}
       <li class="nav-item">
         <a class="nav-link collapsed" href="{% url "core:users" %}">
           <i class="bi bi-person-lines-fill"></i>
@@ -311,70 +311,34 @@
           <span>Content Filter</span>
         </a>
       </li>
-      <li class="nav-item">
+      {% comment %} <li class="nav-item">
         <a class="nav-link collapsed" href="users-profile.html">
           <i class="bi bi-globe"></i>
           <span>Local Network</span>
         </a>
-      </li>
-      <li class="nav-item">
+      </li> {% endcomment %}
+      {% comment %} <li class="nav-item">
         <a class="nav-link collapsed" href="users-profile.html">
           <i class="bi bi-file-earmark-fill"></i>
           <span>DNS</span>
         </a>
-      </li>
-      <li class="nav-item">
+      </li> {% endcomment %}
+      {% comment %} <li class="nav-item">
         <a class="nav-link collapsed" href="users-profile.html">
           <i class="bi bi-arrows-angle-contract"></i>
           <span>Bandwith Management</span>
         </a>
-      </li>
-      <li class="nav-item">
+      </li> {% endcomment %}
+      {% comment %} <li class="nav-item">
         <a class="nav-link collapsed" href="users-profile.html">
           <i class="bi bi-eye"></i>
           <span>Monitoring</span>
         </a>
-      </li>
+      </li> {% endcomment %}
 
 
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Firewall</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="users-profile.html">
-                  <span>Firewall Rules</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link collapsed" href="users-profile.html">
-                  <span>Content Filter</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link collapsed" href="users-profile.html">
-                  <span>Local Network</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link collapsed" href="users-profile.html">
-                  <span>DNS</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link collapsed" href="users-profile.html">
-                  <span>Bandwith Management</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link collapsed" href="users-profile.html">
-                  <span>Monitoring</span>
-                </a>
-            </li>
-        </ul>
-      </li><!-- End Components Nav -->
+      
     </ul>
 
   </aside><!-- End Sidebar-->
