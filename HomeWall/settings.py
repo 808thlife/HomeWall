@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'accounts',
     'dhcp',
     'rest_framework',
-    'iptables'
+    'iptables',
+    'filter'
 ]
 
 MIDDLEWARE = [

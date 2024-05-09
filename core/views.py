@@ -5,6 +5,7 @@ from dhcp.utils import *
 from HomeWall.settings import LOGIN_URL
 from accounts.models import User
 from iptables.models import IptablesRule
+from filter.models import Filter
 from dhcp.display_ips import scan_network
 
 @staff_member_required(login_url=LOGIN_URL)
@@ -43,3 +44,13 @@ def dhcp_view(request):
     context = {"address": address, "start":start_ip, 
     "end":end_ip, "dhcp_mask":mask, "restart_time": restart_time, "table":ips_arr}
     return render(request, "core/dhcp.html", context)
+
+@staff_member_required(login_url=LOGIN_URL)
+def filter(request):
+    filters = Filter.objects.all()
+
+    actions = Filter.ACTION_CHOICES
+    categories = Filter.CATEGORIES_CHOICES
+
+    context = {"filters":filters, "actions":actions, "categories":categories}
+    return render(request, "core/filter.html", context)

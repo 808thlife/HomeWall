@@ -1,0 +1,171 @@
+{% extends "core/layout.html" %}
+{% load static %}
+{% block body %}
+
+<main id="main" class="main">
+  
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Content Filter</h5>
+      <div class="search-bar">
+        <form class="search-form d-flex align-items-center" method="POST" action="#">
+          <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+          <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+        </form>
+      </div>
+      
+      <!-- Dark Table -->
+      <table class="table table-primary">
+        <thead>
+          <tr>
+            
+            <th scope="col">Domain</th>
+            <th scope="col">Category</th>
+            <th scope="col">Action</th>
+            <th scope="col">Active</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for filter in filters %}
+            <tr>
+                <td>{{filter.domain}}</td>
+                <td>{{filter.category}}</td>
+                <td>{{filter.action}}</td>
+                <td>{{filter.active}}</td>  
+                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#editFilter{{filter.id}}">
+                  <i class = "bi bi-pencil"></i>
+                </button></td>
+                <td><form action="{% url "filter:delete_filter" filter.id %} " method = "post">
+                  {% csrf_token %}
+                  <button type = "submit" class = "btn btn-danger">
+                  <i class = "bi bi-trash"></i>
+                </button></form></td>
+              </tr>
+              <!--Modal window for editing filter-->
+          <div class="modal fade" id="editFilter{{filter.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="editFilter{{filter.id}}Label">Edit Filter</h5>
+                  <button type="button" class="btn btn-light close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class = "bi bi-x-lg"></i></span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="{% url "filter:edit_filter" filter.id %}" method = "post">
+                    {% csrf_token %}
+                    <label for="domain">Domain: </label>
+                    <input type="text" class = "form-control" value = "{{filter}}" name="domain" placeholder="johndoe.com or *.com"><br>
+
+                    <label for="action">Action: </label>
+                    <select class="form-select" name = "action" aria-label="select example">
+                        {% for action in actions %}
+                          {% if action == filter.action %}
+                            <option value = "{{action}}" selected>{{action}}</option>
+                          {% else %}
+                            <option value = "{{action}}">{{action}}</option>
+                          {% endif %}
+                        {% endfor %}
+                    
+                    </select> <br>
+
+                    <label for="category">Categories: </label>
+                    <select class="form-select" name="category" aria-label="select example">
+                        {% for category in categories %}
+                          {% if category == filter.category %}
+                          <option value="{{category}}" selected>{{category}}</option>
+                          {% else %}
+                          <option value="{{category}}">{{category}}</option>
+                          {% endif %}
+                        {% endfor %}
+                    </select><br>
+                  
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+            {% endfor %}
+          
+          
+        </tbody>
+      </table>
+      <!-- End Dark Table -->
+      <!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addFilter">
+  Add Rule
+</button>
+
+            <!-- Modal for adding filter -->
+          <div class="modal fade" id="addFilter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addFilterLabel">Add Filter</h5>
+                  <button type="button" class="btn btn-light close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class = "bi bi-x-lg"></i></span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  
+                    <form action="{% url "filter:add_filter" %}" method = "post">
+                        {% csrf_token %}
+                        <label for="domain">Domain: </label>
+                        <input type="text" class = "form-control" name="domain" placeholder="johndoe.com or *.com"><br>
+    
+                        <label for="action">Action: </label>
+                        <select class="form-select" name = "action" aria-label="select example">
+                            {% for action in actions %}
+                            <option value = "{{action}}" selected>{{action}}</option>
+                            {% endfor %}
+                        
+                        </select> <br>
+
+                        <label for="category">Categories: </label>
+                        <select class="form-select" name="category" aria-label="select example">
+                            {% for category in categories %}
+                                <option value="{{category}}">{{category}}</option>
+                            {% endfor %}
+                        </select><br>
+                      
+                        <button type="submit" class="btn btn-success">Add</button>
+                      </form>
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+    </div>
+  </div>
+
+
+
+
+</main>
+
+
+{% endblock body %}
+
+{% block scripts %}
+<script src = "{% static "core/js/jquery.js" %}"></script>
+<script src = "{% static "core/js/jquery.min.js" %}"></script>
+<script src = "{% static "core/js/jquery-3.4.1.slim.min.js" %}"></script>
+<script src = "{% static 'core/js/jqueryformodals.slim.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% endblock scripts %}
+
+
+
+

@@ -23,5 +23,6 @@ urlpatterns = [
     path("api/", include('api.urls')),
     path("authentication/", include('accounts.urls')),
     path("dhcp/", include('dhcp.urls')),
-    path("iptables/", include("iptables.urls"))
+    path("iptables/", include("iptables.urls")),
+    path("filter/", include("filter.urls"))
 ]
