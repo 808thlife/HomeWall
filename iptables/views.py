@@ -3,6 +3,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import IptablesRule
 
+import os 
+import sys
 # Create your views here.
 
 def index(request):
@@ -28,33 +30,13 @@ def create(request):
                         source_ip = source_ip, destination_ip = destination_ip,
                         port = port, protocol = protocol)
         f.save()
-        # Commit the changes
-        #iptc.easy.commit()
+
+        
     
-        # Return success response
         return HttpResponseRedirect(reverse("core:rules_view"))
-        #return HttpResponse("Rule created successfully")
+
 
 def edit(request, ID):
-    # Get parameters from the request
-    # Example: table, chain, rule_index, new_rule_spec
-    
-    # Get the chain object
-    # Example: chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), 'INPUT')
-    
-    # Get the rule to edit
-    # Example: rule = chain.rules[rule_index]
-    
-    # Modify the rule properties based on request parameters
-    # Example: rule.src = '192.168.2.0/24'
-    # Example: rule.target = iptc.Target(rule, 'DROP')
-    
-    # Update the rule in the chain
-    # Example: chain.rules[rule_index] = rule
-    
-    # Commit the changes
-    # Example: iptc.easy.commit()
-    
     name = request.POST.get("name", "empty name")
     type = request.POST.get("table", "filter")  # Default to "filter" table if not provided
     chain = request.POST.get("chain", "INPUT")   # Default to "INPUT" chain if not provided
@@ -78,24 +60,46 @@ def edit(request, ID):
     
     rule.save()
 
+    execute_command_from_line(rule, "delete")
+    execute_command_from_line(rule, "create")
+
     # Return success response
     return HttpResponseRedirect(reverse("core:rules_view"))
 
 
 def delete(request, ID):
-    # Get parameters from the request
-    # Example: table, chain, rule_index
-    
-    # Get the chain object
-    # Example: chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), 'INPUT')
-    
-    # Delete the rule from the chain
-    # Example: del chain.rules[rule_index]
-    
-    # Commit the changes
-    # Example: iptc.easy.commit()
-    
-    # Return success response
     rule = IptablesRule.objects.get(id = ID)
+
+    execute_command_from_line(rule, "delete")
+
     rule.delete()
     return HttpResponseRedirect(reverse("core:rules_view"))
+
+def execute_command_from_line(rule, action):
+    if action == "create":
+        command = f"iptables -A {rule.chain}"  # Append rule to the specified chain
+        if name:
+            command += f" -N {rule.name}"  # Create a new chain with the provided name (optional)
+        if source_ip:
+            command += f" -s {rule.source_ip}"
+        if destination_ip:
+            command += f" -d {rule.destination_ip}"
+        if port:
+            command += f" --dport {rule.port}"
+        if protocol:
+            command += f" -p {rule.protocol}"
+        if action:
+            command += f" -j {rule.action}"
+
+        print(f"iptables rule created (name: {name}, chain: {chain})")
+
+    elif action == "delete":
+        command = f"iptables -D {rule.chain}"  # Delete rule from the specified chain
+        if name:
+            command += f" {rule.name}"  # Specify rule name by name (optional)
+        print(f"Command is: {command}")
+
+    if action != "delete" or action != "create":
+        sys.exit("Invalid action")
+        
+    os.system(command)
