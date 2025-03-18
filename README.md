@@ -1,3 +1,5 @@
+# Simple Firewall with basic functionality
+
 # Starting
 
 1. First step is to install all dependencies `pip install -r requirements.txt`
